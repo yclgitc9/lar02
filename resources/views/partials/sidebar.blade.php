@@ -20,6 +20,7 @@
       </div>
 
       <!-- Sidebar Menu -->
+      @can('users_manage')
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
@@ -62,7 +63,7 @@
                     <span class="title">Users</span>
                 </a>
           </li>
-
+      @endcan
           <li>
                 <a href="logout">
                     <span class="title">Logout</span>
@@ -70,6 +71,7 @@
           </li>
         </ul>
       </nav>
+      
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
