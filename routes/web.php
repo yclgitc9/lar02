@@ -1,0 +1,30 @@
+<?php
+
+// Authentication Routes...
+$this->get('login', 'Auth\LoginController@showLoginForm')->name('auth.login');
+$this->post('login', 'Auth\LoginController@login')->name('auth.login');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+// $this->post('logout', 'Auth\LoginController@logout')->name('auth.logout');
+
+
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::resource('users', 'Admin\UsersController');
+    Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
+});
+
+Route::resource('buyers', 'Buyer\BuyerController');
+Route::resource('categories', 'Category\CategoryController');
+Route::resource('products', 'Product\ProductController');
+Route::resource('sellers', 'Seller\SellerController');
+Route::resource('transactions', 'Transaction\TransactionController');
+
+

@@ -1,0 +1,23 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variablesxx
+@import 'variables';
+$fa-font-path:  "webfonts";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import '~admin-lte/dist/css/adminlte.css';
+
+@import "scss/fontawesome.scss";
+@import "scss/solid.scss";
+@import "scss/regular.scss";
+@import "scss/brands.scss";
+
+
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+} 

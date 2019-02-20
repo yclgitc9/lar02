@@ -1,0 +1,1 @@
+this is mass destroy php
