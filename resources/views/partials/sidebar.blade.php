@@ -15,7 +15,7 @@
           <img src="img/profile.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}}</a>
         </div>
       </div>
 
@@ -40,6 +40,21 @@
                   <p>Users</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="{{ route('admin.roles.index') }}" class="nav-link active">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Roles</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('admin.permissions.index') }}" class="nav-link active">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Permissions</p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>

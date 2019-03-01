@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 
 
@@ -16,7 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<div id="wrapper">
 
 
   
@@ -31,8 +27,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
-    Content goes here
-    @yield('content')  
+      <div class="col-md-12">
+        Content goes here
+        @yield('content') 
+      </div>  
     </div><!-- /.content -->
   </div><!-- /.content-wrapper -->
 

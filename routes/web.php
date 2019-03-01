@@ -17,9 +17,17 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::resource('roles', 'Admin\RolesController');
+    Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
+
+    Route::resource('permissions', 'Admin\PermissionsController');
+    Route::post('permissions_mass_destroy', ['uses' => 'Admin\PermissionsController@massDestroy', 'as' => 'permissions.mass_destroy']);
+
     Route::resource('users', 'Admin\UsersController');
     Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
 });
+
+
 
 Route::resource('buyers', 'Buyer\BuyerController');
 Route::resource('categories', 'Category\CategoryController');
