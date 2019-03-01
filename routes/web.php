@@ -34,5 +34,5 @@ Route::resource('categories', 'Category\CategoryController');
 Route::resource('products', 'Product\ProductController');
 Route::resource('sellers', 'Seller\SellerController');
 Route::resource('transactions', 'Transaction\TransactionController');
-
+// this is a comment
 
