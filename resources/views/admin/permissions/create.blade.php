@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.appx')
 
 @section('content')
     <h3 class="page-title">@lang('global.permissions.title')</h3>

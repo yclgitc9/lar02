@@ -1,4 +1,3 @@
-@extends('layouts.app')
 
 @section('content')
     <h3 class="page-title">@lang('global.roles.title')</h3>
