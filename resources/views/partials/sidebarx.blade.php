@@ -57,7 +57,7 @@
             
 
             <li>
-                <a href="#logout" onclick="$('#logout').submit();">
+                <a href="{{route('logout')}}">
                     <i class="fa fa-arrow-left"></i>
                     <span class="title">@lang('global.app_logout')</span>
                 </a>
