@@ -1,5 +1,5 @@
 @inject('request', 'Illuminate\Http\Request')
-@extends('layouts.master')
+@extends('layouts.appx')
 
 @section('content')
     <h3 class="page-title">@lang('global.roles.title')</h3>
