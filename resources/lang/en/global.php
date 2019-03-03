@@ -51,5 +51,5 @@ return [
 	'app_back_to_list' => 'Back to list',
 	'app_dashboard' => 'Dashboard',
 	'app_delete' => 'Delete',
-	'global_title' => 'Roles-Permissions Manager',
+	'global_title' => 'Database Management',
 ];
