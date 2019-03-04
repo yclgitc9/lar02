@@ -6,6 +6,17 @@
     
 
     <section class="sidebar">
+
+        <div class="user-panel">
+            <div class="image mb-3">
+                <img src="img/profile.png" class=" img-circle elevation-2" alt="User Image">
+            </div>
+            <!-- <div class="info"> -->
+            <div>
+                <a href="#">{{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}}</a>
+            </div>
+        </div>
+
         <ul class="sidebar-menu">
 
             <li class="{{ $request->segment(1) == 'home' ? 'active' : '' }}">
