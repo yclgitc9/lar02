@@ -9,7 +9,7 @@
 
         <div class="user-panel">
             <div class="image mb-3">
-                <img src="img/profile1.png" class=" img-circle elevation-2" alt="User Image">
+                <img src="/img/profile1.png" class=" img-circle elevation-2" alt="User Image">
             </div>
             <!-- <div class="info"> -->
             <div>
