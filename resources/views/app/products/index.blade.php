@@ -5,7 +5,7 @@
 @section('content')
     <h3 class="page-title">Products</h3>
     <p>
-        <a href="{{ route('books.create') }}" class="btn btn-success">Add New</a>
+        <a href="{{ route('products.create') }}" class="btn btn-success">Add New</a>
     </p>
 
     <div class="panel panel-default">
@@ -14,7 +14,7 @@
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($books) > 0 ? 'datatable' : '' }} dt-select">
+            <table class="table table-bordered table-striped {{ count($products) > 0 ? 'datatable' : '' }} dt-select">
                 <thead>
                     <tr>
                         <th style="text-align:center;"><input type="checkbox" id="select-all" /></th>
@@ -28,21 +28,21 @@
                 </thead>
                 
                 <tbody>
-                    @if (count($books) > 0)
-                        @foreach ($books as $book)
-                            <tr data-entry-id="{{ $book->id }}">
+                    @if (count($products) > 0)
+                        @foreach ($products as $product)
+                            <tr data-entry-id="{{ $product->id }}">
                                 <td></td>
 
-                                <td>{{ $book->name }}</td>
-                                <td>{{ $book->author }}</td>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ $product->author }}</td>
                                 
                                 <td>
-                                    <a href="{{ route('books.edit',[$book->id]) }}" class="btn btn-xs btn-info">Editx</a>
+                                    <a href="{{ route('products.edit',[$product->id]) }}" class="btn btn-xs btn-info">Editx</a>
                                     {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
                                         'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['books.index', $book->id])) !!}
+                                        'route' => ['products.index', $product->id])) !!}
                                     {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                 </td>
@@ -65,6 +65,6 @@
 
 @section('javascript') 
     <script>
-        window.route_mass_crud_entries_destroy = '{{ route('admin.users.mass_destroy') }}';
+        window.route_mass_crud_entries_destroy = '{{ route('products.mass_destroy') }}';
     </script>
 @endsection

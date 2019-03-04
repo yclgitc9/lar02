@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Product;
+
 class ProductController extends Controller
 {
     /**
@@ -14,7 +16,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        // if (! Gate::allows('users_manage')) {
+        //     return abort(401);
+        // }
+
+        $products = Product::all();
+
+        return view('app.products.index', compact('products'));
     }
 
     /**

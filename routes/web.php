@@ -27,11 +27,14 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
 });
 
-
+Route::group(['middleware' => ['auth']], function () {    
+    Route::resource('products', 'Product\ProductController');
+    Route::post('products_mass_destroy', ['uses' => 'Product\ProductsController@massDestroy', 'as' => 'products.mass_destroy']);
+});
 
 Route::resource('buyers', 'Buyer\BuyerController');
 Route::resource('categories', 'Category\CategoryController');
-Route::resource('products', 'Product\ProductController');
+
 Route::resource('sellers', 'Seller\SellerController');
 Route::resource('transactions', 'Transaction\TransactionController');
 // this is a comment
