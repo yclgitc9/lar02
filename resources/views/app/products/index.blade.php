@@ -14,15 +14,14 @@
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($products) > 0 ? 'datatable' : '' }} dt-select">
+            <table id="example" class="table table-bordered table-striped {{ count($products) > 0 ? 'datatable' : '' }} dt-select">
                 <thead>
                     <tr>
                         <th style="text-align:center;"><input type="checkbox" id="select-all" /></th>
 
                         <th>name</th>
-                        <th>author</th>
-                        
-                        <th>&nbsp;</th>
+                        <th>description</th>
+                        <th>category</th>
 
                     </tr>
                 </thead>
@@ -34,10 +33,12 @@
                                 <td></td>
 
                                 <td>{{ $product->name }}</td>
-                                <td>{{ $product->author }}</td>
-                                
+                                <td>{{ str_limit($product->description, 25) }}</td>
+                                <td>@foreach($product->categories as $category)
+                                        <li>{{ $category->name }}</li>
+                                    @endforeach</td>
                                 <td>
-                                    <a href="{{ route('products.edit',[$product->id]) }}" class="btn btn-xs btn-info">Editx</a>
+                                    <a href="{{ route('products.edit',[$product->id]) }}" class="btn btn-xs btn-info">Edit</a>
                                     {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
@@ -63,8 +64,11 @@
     
 @stop
 
-@section('javascript') 
+@section('javascript')
     <script>
-        window.route_mass_crud_entries_destroy = '{{ route('products.mass_destroy') }}';
+    $(document).ready(function() {
+    $('#example').DataTable();
+} );
+        window.route_mass_crud_entries_destroy = '{{ route('admin.users.mass_destroy') }}';
     </script>
 @endsection
