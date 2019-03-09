@@ -2,49 +2,45 @@
 @extends('layouts.appx')
 
 @section('content')
-
-    <h3 class="page-title">@lang('global.users.title')</h3>
+    <h3 class="page-title">Products</h3>
     <p>
-        <a href="{{ route('admin.users.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
+        <a href="{{ route('products.create') }}" class="btn btn-success">Add New</a>
     </p>
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            @lang('global.app_list')
+            List
         </div>
 
         <div class="panel-body table-responsive">
-            <table id="example" class="table table-bordered table-striped {{ count($users) > 0 ? 'datatable' : '' }} dt-select">
+            <table id="example" class="table table-bordered table-striped {{ count($products) > 0 ? 'datatable' : '' }} dt-select">
                 <thead>
                     <tr>
                         <th style="text-align:center;"><input type="checkbox" id="select-all" /></th>
-                        <th>@lang('global.users.fields.name')</th>
-                        <th>@lang('global.users.fields.email')</th>
-                        <th>@lang('global.users.fields.roles')</th>
-                        <th>&nbsp;</th>
+                        <th>name</th>
+                        <th>description</th>
+                        <th>category</th>
                     </tr>
                 </thead>
                 
                 <tbody>
-                    @if (count($users) > 0)
-                        @foreach ($users as $user)
-                            <tr data-entry-id="{{ $user->id }}">
+                    @if (count($products) > 0)
+                        @foreach ($products as $product)
+                            <tr data-entry-id="{{ $product->id }}">
                                 <td></td>
 
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ str_limit($product->description, 25) }}</td>
+                                <td>@foreach($product->categories as $category)
+                                        <li>{{ $category->name }}</li>
+                                    @endforeach</td>
                                 <td>
-                                    @foreach ($user->roles()->pluck('name') as $role)
-                                        <span class="label label-info label-many">{{ $role }}</span>
-                                    @endforeach
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.users.edit',[$user->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    <a href="{{ route('products.edit',[$product->id]) }}" class="btn btn-xs btn-info">Edit</a>
                                     {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
                                         'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['admin.users.destroy', $user->id])) !!}
+                                        'route' => ['products.destroy', $product->id])) !!}
                                     {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                 </td>
@@ -60,15 +56,14 @@
             </table>
         </div>
     </div>
+    
 @stop
 
-
-
 @section('javascript')
-    <script>
+<script>
     $(document).ready(function() {
     $('#example').DataTable();
 } );
-     window.route_mass_crud_entries_destroy = '{{ route('admin.users.mass_destroy') }}';
+     window.route_mass_crud_entries_destroy = '{{ route('products.mass_destroy') }}';
     </script>
 @endsection

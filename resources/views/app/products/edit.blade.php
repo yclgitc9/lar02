@@ -1,20 +1,33 @@
 @extends('layouts.appx')
 
 @section('content')
-    <h3 class="page-title">Products Edit</h3>
+    <h3 class="page-title">Products</h3>
     
-    {!! Form::model($product, ['method' => 'PUT', 'route' => ['products.edit', $product->id]]) !!}
+    {!! Form::model($product, ['method' => 'PUT', 'route' => ['products.update', $product->id]]) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            editing
+            Edit
         </div>
 
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('name', 'Product Name*', ['class' => 'control-label']) !!}
-                    {!! Form::text('name', old('title'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    <!-- @if($errors->has('name'))
+                        <p class="help-block">
+                            {{ $errors->first('name') }}
+                        </p>
+                    @endif -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('description', 'Product Description*', ['class' => 'control-label']) !!}
+                    {!! Form::text('description', old('description'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('name'))
                         <p class="help-block">
@@ -26,8 +39,8 @@
 
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('category', 'Product Category*', ['class' => 'control-label']) !!}
-                    {!! Form::text('category', old('title'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::label('quantity', 'Product Quantity*', ['class' => 'control-label']) !!}
+                    {!! Form::text('quantity', old('quantity'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('name'))
                         <p class="help-block">
@@ -37,8 +50,47 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="col-md-4 control-label">Country</label>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('status', 'Product Status*', ['class' => 'control-label']) !!}
+                    {!! Form::text('status', old('status'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('name'))
+                        <p class="help-block">
+                            {{ $errors->first('name') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('image', 'Product Image*', ['class' => 'control-label']) !!}
+                    {!! Form::text('image', old('image'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('name'))
+                        <p class="help-block">
+                            {{ $errors->first('name') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('seller_id', 'Product Seller_id*', ['class' => 'control-label']) !!}
+                    {!! Form::text('seller_id', old('seller_id'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('name'))
+                        <p class="help-block">
+                            {{ $errors->first('name') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+
+            <!-- <div class="form-group">
+                <label class="col-md-4 control-label">Category</label>
                     <div class="col-md-6">
                         <select class="form-control js-country" name="country_id">
                             <option value="-1">Please select your category</option>
@@ -47,7 +99,7 @@
                             @endforeach
                         </select>
                     </div>
-            </div>
+            </div> -->
             
         </div>
     </div>

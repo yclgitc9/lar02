@@ -105,10 +105,10 @@ class ProductController extends Controller
         }
         $product = Product::findOrFail($id);
         $product->update($request->all());
-        $roles = $request->input('roles') ? $request->input('roles') : [];
-        $user->syncRoles($roles);
+        // $roles = $request->input('roles') ? $request->input('roles') : [];
+        // $user->syncRoles($roles);
 
-        return redirect()->route('app.products.index');
+        return redirect()->route('products.index');
     }
 
     /**
