@@ -6,6 +6,7 @@ use App\Employee;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use App\Department;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\App\Employee\StoreEmployeesRequest;
 use App\Http\Requests\App\Employee\UpdateEmployeesRequest;
@@ -20,7 +21,9 @@ class EmployeesController extends Controller
     public function index()
     {
         $employees = Employee::all();
+        
         $departments = Department::all();
+        // dd($departments);
         return view('app.employees.index', compact('employees', 'departments'));
         
     }
@@ -76,9 +79,14 @@ class EmployeesController extends Controller
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit($id)
     {
-        //
+        if (! Gate::allows('users_manage')) {
+            return abort(401);
+        }
+        $employee = Employee::findOrFail($id);
+        $departments = Department::all();
+        return view('app.employees.edit', compact('employee', 'departments'));
     }
 
     /**
@@ -88,9 +96,15 @@ class EmployeesController extends Controller
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(UpdateEmployeesRequest $request, $id)
     {
-        //
+        if (! Gate::allows('users_manage')) {
+            return abort(401);
+        }
+        $employee = Employee::findOrFail($id);
+        $employee->update($request->all());
+
+        return redirect()->route('employees.index');
     }
 
     /**

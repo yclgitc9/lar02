@@ -97,6 +97,40 @@
                 </ul>
             </li>
             @endcan
+
+            @can('users_manage')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span class="title">Employees Management</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+
+                    <li class="{{ $request->segment(2) == 'permissions' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('departments.index') }}">
+                            <i class="fa fa-briefcase"></i>
+                            <span class="title">
+                                List Departments
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="{{ $request->segment(2) == 'permissions' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('employees.index') }}">
+                            <i class="fa fa-briefcase"></i>
+                            <span class="title">
+                                List Employees
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+            </li>
+            @endcan
             
 
             <li>

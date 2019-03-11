@@ -110,7 +110,7 @@ class DepartmentsController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Department $department)
+    public function destroy($id)
     {
         // if (! Gate::allows('users_manage')) {
         //     return abort(401);
@@ -118,6 +118,6 @@ class DepartmentsController extends Controller
         $department = Department::findOrFail($id);
         $department->delete();
 
-        return redirect()->route('department.index');
+        return redirect()->route('departments.index');
     }
 }
