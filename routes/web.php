@@ -28,8 +28,18 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 });
 
 Route::group(['middleware' => ['auth']], function () {    
-    Route::resource('products', 'Product\ProductController');
-    Route::post('products_mass_destroy', ['uses' => 'Product\ProductsController@massDestroy', 'as' => 'products.mass_destroy']);
+    Route::resource('products', 'Product\ProductsController');
+    Route::post('products.mass_destroy', ['uses' => 'Product\ProductsController@massDestroy', 'as' => 'products.mass_destroy']);
+});
+
+Route::group(['middleware' => ['auth']], function () {    
+    Route::resource('departments', 'Department\DepartmentsController');
+    Route::post('departments.mass_destroy', ['uses' => 'Department\DepartmentsController@massDestroy', 'as' => 'departments.mass_destroy']);
+});
+
+Route::group(['middleware' => ['auth']], function () {    
+    Route::resource('employees', 'Employee\EmployeesController');
+    Route::post('employees.mass_destroy', ['uses' => 'Employee\EmployeesController@massDestroy', 'as' => 'employees.mass_destroy']);
 });
 
 Route::resource('buyers', 'Buyer\BuyerController');

@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Product;
+namespace App\Http\Controllers\Department;
 
+use App\Department;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Gate;
-use App\Product;
-use App\Category;
+use App\Http\Requests\App\Department\StoreDepartmentsRequest;
+use App\Http\Requests\App\Department\UpdateDepartmentsRequest;
 
-class ProductController extends Controller
+class DepartmentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,14 +19,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // if (! Gate::allows('users_manage')) {
-        //     return abort(401);
-        // }
-
-        $products = Product::all();
-        // $products = Product::with('Category')->get();
-
-        return view('app.products.index', compact('products'));
+        $departments = Department::all();
+        return view('app.departments.index', compact('departments'));
+        // return("naaber");
     }
 
     /**
@@ -35,12 +31,13 @@ class ProductController extends Controller
      */
     public function create()
     {
+        // return view('app/books/create');
         if (! Gate::allows('users_manage')) {
             return abort(401);
         }
         $roles = Role::get()->pluck('name', 'name');
-        $categories = Category::all();
-        return view('app.products.create', compact('roles', 'categories'));
+
+        return view('app.departments.create', compact('roles'));
     }
 
     /**
@@ -49,25 +46,26 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreDepartmentsRequest $request)
     {
         if (! Gate::allows('users_manage')) {
             return abort(401);
         }
-        $product = Product::create($request->all());
+        $department = Department::create($request->all());
+        // dd($book);
         // $roles = $request->input('roles') ? $request->input('roles') : [];
         // $user->assignRole($roles);
 
-        return redirect()->route('products.index');
+        return redirect()->route('departments.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Department $department)
     {
         //
     }
@@ -75,7 +73,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -83,42 +81,43 @@ class ProductController extends Controller
         if (! Gate::allows('users_manage')) {
             return abort(401);
         }
-        $roles = Role::get()->pluck('name', 'name');
+        $department = Department::findOrFail($id);
 
-        $product = Product::findOrFail($id);
-        $categories = Category::all();
-
-        return view('app.products.edit', compact('product', 'categories', 'roles'));
+        return view('app.departments.edit', compact('department'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDepartmentsRequest $request, $id)
     {
         if (! Gate::allows('users_manage')) {
             return abort(401);
         }
-        $product = Product::findOrFail($id);
-        $product->update($request->all());
-        // $roles = $request->input('roles') ? $request->input('roles') : [];
-        // $user->syncRoles($roles);
+        $department = Department::findOrFail($id);
+        $department->update($request->all());
 
-        return redirect()->route('products.index');
+        return redirect()->route('departments.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Department $department)
     {
-        //
+        // if (! Gate::allows('users_manage')) {
+        //     return abort(401);
+        // }
+        $department = Department::findOrFail($id);
+        $department->delete();
+
+        return redirect()->route('department.index');
     }
 }
