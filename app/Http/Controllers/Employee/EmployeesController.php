@@ -113,8 +113,14 @@ class EmployeesController extends Controller
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy($id)
     {
-        //
+        // if (! Gate::allows('users_manage')) {
+        //     return abort(401);
+        // }
+        $employee = Employee::findOrFail($id);
+        $employee->delete();
+
+        return redirect()->route('employees.index');
     }
 }
