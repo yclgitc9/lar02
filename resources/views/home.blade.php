@@ -7,7 +7,9 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    
+                    <p>Number of users = {{ $users->count() }}</p>
+                    <p>Number of products = {{ $products->count() }}</p>
                 </div>
             </div>
         </div>
